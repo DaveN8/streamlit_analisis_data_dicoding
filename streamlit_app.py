@@ -25,23 +25,37 @@ new_df = pd.concat([df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11, df1
 new_df = new_df.dropna()
 
 ## Dashboard sederhana
-st.header('Dashboard Sederhana Kualitas Udara')
+st.title('Dashboard Sederhana Kualitas Udara')
 
 st.subheader('Pertanyaan 1')
-col1 = st.column(1)
 
-with col1:
-    st.text('Distribusi Polusi Udara')
+st.subheader('Distribusi Polutan Udara')
+# Buat plot
+fig1, ax1 = plt.subplots(figsize=(16, 8))
+ax1.hist(new_df['PM2.5'], bins=50, alpha=0.5, label='PM2.5')
+ax1.hist(new_df['PM10'], bins=50, alpha=0.5, label='PM10')
+ax1.hist(new_df['SO2'], bins=50, alpha=0.5, label='SO2')
+ax1.hist(new_df['NO2'], bins=50, alpha=0.5, label='NO2')
+ax1.hist(new_df['CO'], bins=50, alpha=0.5, label='CO')
+ax1.hist(new_df['O3'], bins=50, alpha=0.5, label='O3')
+ax1.set_xlabel('Nilai dari Polutan Udara')
+ax1.set_ylabel('Frekuensi Kemunculan')
 
-fig, ax = plt.subplots(figzise=(16, 8))
-ax[0].hist(new_df['PM2.5'], bins=50, alpha=0.5, label='PM2.5')
-ax[0].hist(new_df['PM10'], bins=50, alpha=0.5, label='PM10')
-ax[0].hist(new_df['SO2'], bins=50, alpha=0.5, label='SO2')
-ax[0].hist(new_df['NO2'], bins=50, alpha=0.5, label='NO2')
-ax[0].hist(new_df['CO'], bins=50, alpha=0.5, label='CO')
-ax[0].hist(new_df['O3'], bins=50, alpha=0.5, label='O3')
-ax[0].set_xlabel('Nilai dari Polutan Udara')
-ax[0].set_ylabel('Frekuensi Kemunculan')
-ax[0].title('Distribusi Polutan Udara')
-ax[0].legend()
-st.pyplot(fig)
+# Tampilkan plot di Streamlit
+st.pyplot(fig1)
+
+st.subheader('Pertanyaan 2')
+
+st.subheader('Perubahan Kualitas Udara')
+# Buat plot
+fig2, ax2 = plt.subplots(figsize=(16, 8))
+ax2.hist(new_df['year'], bins=50, alpha=0.5, label='PM2.5')
+ax2.hist(new_df['year'], bins=50, alpha=0.5, label='PM10')
+ax2.hist(new_df['year'], bins=50, alpha=0.5, label='SO2')
+ax2.hist(new_df['year'], bins=50, alpha=0.5, label='NO2')
+ax2.hist(new_df['year'], bins=50, alpha=0.5, label='CO')
+ax2.hist(new_df['year'], bins=50, alpha=0.5, label='O3')
+ax2.set_xlabel('Tahun')
+ax2.set_ylabel('Kualitas Udara')
+
+st.pyplot(fig2)
